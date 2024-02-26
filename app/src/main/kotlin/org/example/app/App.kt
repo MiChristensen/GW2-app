@@ -3,12 +3,15 @@
  */
 package org.example.app
 
-import org.example.utilities.StringUtils
-
-import org.apache.commons.text.WordUtils
+import connectToDatabase
+import id.UserId
+import repositories.UserReadRepositoryImpl
+import repositories.getByIdOrNull
 
 fun main() {
-    val tokens = StringUtils.split(MessageUtils.getMessage())
-    val result = StringUtils.join(tokens)
-    println(WordUtils.capitalize(result))
+    val database = connectToDatabase()
+
+    val userRepo = UserReadRepositoryImpl(database)
+    val user = userRepo.getByIdOrNull(UserId.dontUseThisDirectly(1))
+    println(user)
 }
