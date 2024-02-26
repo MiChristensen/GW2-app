@@ -9,11 +9,11 @@ dependencies {
     implementation(Dependencies.exposedDao)
     implementation(Dependencies.exposedJdbc)
     implementation(Dependencies.mySql)
-    implementation(project(":sharedUtil"))
-    implementation(project(":db"))
-    implementation(project(":readmodel"))
-    implementation(project(":writemodel"))
-    implementation(project(":coreValue"))
+    implementation(sharedUtil())
+    implementation(database())
+    implementation(readmodel())
+    implementation(writemodel())
+    implementation(coreValue())
 }
 
 application {

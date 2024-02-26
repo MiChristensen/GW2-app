@@ -7,7 +7,7 @@ plugins {
 rootProject.name = "GW2-app"
 include("app")
 include("sharedUtil")
-include("db")
+include("database")
 include("readmodel")
 include("writemodel")
 include("coreValue")
