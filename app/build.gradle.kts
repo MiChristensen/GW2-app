@@ -13,7 +13,7 @@ dependencies {
     implementation(project(":db"))
     implementation(project(":readmodel"))
     implementation(project(":writemodel"))
-    implementation(project(":core-value"))
+    implementation(project(":coreValue"))
 }
 
 application {

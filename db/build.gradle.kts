@@ -14,5 +14,5 @@ dependencies {
     implementation(Dependencies.slf4jApi)
     implementation(Dependencies.slf4jSimple)
     implementation(project(":readmodel"))
-    implementation(project(":core-value"))
+    implementation(project(":coreValue"))
 }

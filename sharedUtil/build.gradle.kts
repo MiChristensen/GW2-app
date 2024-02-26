@@ -7,8 +7,6 @@ plugins {
 }
 
 dependencies {
-    api(project(":list"))
-    // implementation group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: '1.9.22'
     testImplementation(Dependencies.kotlinTest)
 
 }
