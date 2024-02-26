@@ -2,6 +2,7 @@
 
 
 object Dependencies {
+    val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlinTest}"
     val exposedCore = "org.jetbrains.exposed:exposed-core:${Versions.exposed}"
     val exposedDao = "org.jetbrains.exposed:exposed-dao:${Versions.exposed}"
     val exposedJdbc = "org.jetbrains.exposed:exposed-jdbc:${Versions.exposed}"

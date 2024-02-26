@@ -25,7 +25,7 @@
             <option value="$PROJECT_DIR$/db" />
             <option value="$PROJECT_DIR$/list" />
             <option value="$PROJECT_DIR$/readmodel" />
-            <option value="$PROJECT_DIR$/utilities" />
+            <option value="$PROJECT_DIR$/sharedUtil" />
             <option value="$PROJECT_DIR$/writemodel" />
           </set>
         </option>

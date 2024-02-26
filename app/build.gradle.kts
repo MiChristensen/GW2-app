@@ -1,5 +1,6 @@
 plugins {
     id("buildlogic.kotlin-application-conventions")
+    application
 }
 
 dependencies {
@@ -8,7 +9,7 @@ dependencies {
     implementation(Dependencies.exposedDao)
     implementation(Dependencies.exposedJdbc)
     implementation(Dependencies.mySql)
-    implementation(project(":utilities"))
+    implementation(project(":sharedUtil"))
     implementation(project(":db"))
     implementation(project(":readmodel"))
     implementation(project(":writemodel"))
@@ -17,5 +18,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.app.AppKt"
+    mainClass = "gw2.app.AppKt"
 }
