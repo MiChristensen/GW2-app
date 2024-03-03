@@ -3,8 +3,9 @@ import org.jetbrains.exposed.sql.DatabaseConfig
 import org.jetbrains.exposed.sql.Schema
 
 fun connectToDatabase(): Database {
+    print("Connecting to database.. ")
     return try {
-        Database.connect(
+        val database = Database.connect(
             url = "jdbc:mysql://localhost:3306",
             user = "root",
             password = "qFRrXR85*xcY\$5",
@@ -12,8 +13,10 @@ fun connectToDatabase(): Database {
                 defaultSchema = Schema("gw2")
             }
         )
+        println("Success!")
+        database
     } catch (e: Exception) {
-        println("Failed to connect to database")
+        println("Failed!")
         throw e
     }
 }
