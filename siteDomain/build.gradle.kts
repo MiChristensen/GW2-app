@@ -9,6 +9,6 @@ repositories {
 dependencies {
     implementation(readmodel())
     implementation(coreValue())
-
+    implementation(frontend())
     testImplementation(Dependencies.kotlinTest)
 }

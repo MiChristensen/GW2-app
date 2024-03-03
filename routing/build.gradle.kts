@@ -20,11 +20,13 @@ dependencies {
     implementation(siteDomain())
     implementation(readmodel())
     implementation(writemodel())
+    implementation(frontend())
 
     implementation(Dependencies.kotlinSerialization)
     implementation(Dependencies.kotlinxSerialization)
     implementation(Dependencies.ktorCore)
     implementation(Dependencies.ktorLocations)
+    implementation(Dependencies.ktorHtmlBuilder)
     // implementation(Dependencies.ktorHost)
     // implementation(Dependencies.ktorStatus)
     // implementation(Dependencies.ktorCall)

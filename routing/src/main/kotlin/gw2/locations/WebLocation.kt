@@ -7,9 +7,11 @@ import gw2.models.frontPageModel
 import gw2.models.getUserApiKeyModel
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.html.*
 import io.ktor.server.locations.*
 import io.ktor.server.response.*
 import io.ktor.util.pipeline.*
+import pages.FrontpageTemplate
 
 sealed class RequestHandler<T : WebLocation> {
     abstract suspend fun PipelineContext<Unit, ApplicationCall>.handle(
@@ -31,7 +33,10 @@ sealed class RequestHandler<T : WebLocation> {
             location: WebLocation.FrontPageLocation
         ) {
             val response = model()
-            okText(response)
+
+            call.respondHtmlTemplate(FrontpageTemplate(response)) {
+
+            }
         }
     }
 

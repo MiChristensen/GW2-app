@@ -1,5 +1,6 @@
 object Versions {
     val kotlinxSerialization = "1.6.3"
+    val kotlinxHtml = "0.11.0"
     val kotlin = "1.9.22"
     val exposed = "0.45.0"
     val mySql = "8.0.25"
