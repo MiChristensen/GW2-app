@@ -24,6 +24,7 @@
             <option value="$PROJECT_DIR$/coreValue" />
             <option value="$PROJECT_DIR$/database" />
             <option value="$PROJECT_DIR$/readmodel" />
+            <option value="$PROJECT_DIR$/routing" />
             <option value="$PROJECT_DIR$/sharedUtil" />
             <option value="$PROJECT_DIR$/writemodel" />
           </set>

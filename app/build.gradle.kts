@@ -14,6 +14,7 @@ dependencies {
     implementation(readmodel())
     implementation(writemodel())
     implementation(coreValue())
+    implementation(routing())
 }
 
 application {
