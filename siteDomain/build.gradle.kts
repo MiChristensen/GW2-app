@@ -7,5 +7,8 @@ repositories {
 }
 
 dependencies {
+    implementation(readmodel())
+    implementation(coreValue())
+
     testImplementation(Dependencies.kotlinTest)
 }

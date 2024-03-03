@@ -1,5 +1,6 @@
 package gw2.plugins
 
+import gw2.ContentFactory
 import gw2.locations.RequestHandler
 import gw2.locations.WebLocation
 import io.ktor.server.application.*
@@ -8,14 +9,19 @@ import io.ktor.server.routing.*
 
 
 @OptIn(KtorExperimentalLocationsAPI::class)
-fun Application.configureRouting() {
+fun Application.configureRouting(contentFactory: ContentFactory) {
     routing {
-        get<WebLocation.FrontPageLocation> { location ->
-            RequestHandler.FrontPageRequestHandler.handle(this, location)
+        get<WebLocation.FrontPageLocation> {location ->
+            val requestHandler = RequestHandler.FrontPageRequestHandler(contentFactory)
+            with(requestHandler) {
+                handle(location)
+            }
         }
 
         get<WebLocation.GetApiKeyLocation> { location ->
-            RequestHandler.GetApiKeyRequestHandler.handle(this, location)
+            with(RequestHandler.GetApiKeyRequestHandler(contentFactory)) {
+                handle(location)
+            }
         }
     }
 }

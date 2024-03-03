@@ -8,4 +8,6 @@ fun DependencyHandler.database() = project(":database")
 fun DependencyHandler.readmodel() = project(":readmodel")
 fun DependencyHandler.sharedUtil() = project(":sharedUtil")
 fun DependencyHandler.writemodel() = project(":writemodel")
+fun DependencyHandler.siteDomain() = project(":siteDomain")
+
 

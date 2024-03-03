@@ -17,6 +17,10 @@ application {
 
 
 dependencies {
+    implementation(siteDomain())
+    implementation(readmodel())
+    implementation(writemodel())
+
     implementation(Dependencies.kotlinSerialization)
     implementation(Dependencies.kotlinxSerialization)
     implementation(Dependencies.ktorCore)

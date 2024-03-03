@@ -15,6 +15,7 @@ dependencies {
     implementation(writemodel())
     implementation(coreValue())
     implementation(routing())
+    implementation(siteDomain())
 }
 
 application {

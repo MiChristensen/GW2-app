@@ -2,38 +2,60 @@
 
 package gw2.locations
 
+import gw2.ContentFactory
+import gw2.models.frontPageModel
+import gw2.models.getUserApiKeyModel
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.locations.*
 import io.ktor.server.response.*
 import io.ktor.util.pipeline.*
 
-sealed interface RequestHandler<T : WebLocation> {
-    suspend fun handle(
-        pipelineContext: PipelineContext<Unit, ApplicationCall>,
+sealed class RequestHandler<T : WebLocation> {
+    abstract suspend fun PipelineContext<Unit, ApplicationCall>.handle(
         location: T
     )
 
-    data object FrontPageRequestHandler : RequestHandler<WebLocation.FrontPageLocation> {
-        override suspend fun handle(
-            pipelineContext: PipelineContext<Unit, ApplicationCall>,
-            location: WebLocation.FrontPageLocation
-        ) {
-            pipelineContext.call.respondText {
-                "frontPage"
-            }
+    class NotFoundRequestHandler<T: WebLocation> : RequestHandler<T>() {
+        override suspend fun PipelineContext<Unit, ApplicationCall>.handle(location: T) {
+            call.respondText(status = HttpStatusCode.NotFound) { "notFound" }
         }
     }
 
-    data object GetApiKeyRequestHandler : RequestHandler<WebLocation.GetApiKeyLocation> {
-        override suspend fun handle(
-            pipelineContext: PipelineContext<Unit, ApplicationCall>,
-            location: WebLocation.GetApiKeyLocation
+    class FrontPageRequestHandler(
+        contentFactory: ContentFactory
+    ) : RequestHandler<WebLocation.FrontPageLocation>() {
+        val model = contentFactory.frontPageModel()
+
+        override suspend fun PipelineContext<Unit, ApplicationCall>.handle(
+            location: WebLocation.FrontPageLocation
         ) {
-            pipelineContext.call.respondText {
-                "getApiKey: ${location.userId}"
-            }
+            val response = model()
+            okText(response)
         }
     }
+
+    class GetApiKeyRequestHandler(
+        contentFactory: ContentFactory,
+    ) : RequestHandler<WebLocation.GetApiKeyLocation>() {
+        private val model = contentFactory.getUserApiKeyModel()
+        override suspend fun PipelineContext<Unit, ApplicationCall>.handle(
+            location: WebLocation.GetApiKeyLocation
+        ) {
+            val response = model(location.userId) ?: return notFound(location)
+            okText(response)
+        }
+    }
+}
+
+private suspend fun <T : WebLocation> PipelineContext<Unit, ApplicationCall>.notFound(
+    location: T
+) = with(RequestHandler.NotFoundRequestHandler<T>()) {
+    handle(location)
+}
+
+private suspend fun PipelineContext<Unit, ApplicationCall>.okText(text: String) {
+    call.respondText(status = HttpStatusCode.OK) { text }
 }
 
 sealed interface WebLocation {
@@ -42,7 +64,7 @@ sealed interface WebLocation {
 
     @Location("/getApiKey")
     data class GetApiKeyLocation(
-        val userId: String,
+        val userId: Int,
     ) : WebLocation
 }
 
