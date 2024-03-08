@@ -4,6 +4,7 @@ import gw2.ContentFactory
 import id.UserId
 import repositories.UserReadRepository
 import repositories.getByIdOrNull
+import templateData.GetApiKeyTemplateData
 
 fun ContentFactory.getUserApiKeyModel() = GetUserApiKeyModel(
     rmr.userReadRepository
@@ -12,10 +13,10 @@ fun ContentFactory.getUserApiKeyModel() = GetUserApiKeyModel(
 class GetUserApiKeyModel(
     private val userRepo: UserReadRepository
 ) {
-    operator fun invoke(rawUserId: Int): String? {
+    operator fun invoke(rawUserId: Int): GetApiKeyTemplateData? {
         // TODO IdFactory
         val userId = UserId.dontUseThisDirectly(rawUserId)
         val user = userRepo.getByIdOrNull(userId) ?: return null
-        return user.apiKey
+        return GetApiKeyTemplateData(user.userId.id, user.apiKey)
     }
 }

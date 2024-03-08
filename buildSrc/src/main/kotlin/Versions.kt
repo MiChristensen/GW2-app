@@ -7,4 +7,5 @@ object Versions {
     val slf4j = "2.0.12"
     val ktor = "2.3.8"
     val logBack = "1.4.14"
+    val sass = "1.5.0"
 }

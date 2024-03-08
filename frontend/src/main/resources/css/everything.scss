@@ -1,0 +1,7 @@
+.red-bg {
+  &.bordered {
+    border: 2px dashed black;
+  }
+
+  background-color: red;
+}

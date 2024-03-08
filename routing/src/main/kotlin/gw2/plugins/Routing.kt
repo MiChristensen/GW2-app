@@ -1,9 +1,11 @@
 package gw2.plugins
 
 import gw2.ContentFactory
-import gw2.locations.RequestHandler
 import gw2.locations.WebLocation
+import gw2.requesthandlers.FrontPageRequestHandler
+import gw2.requesthandlers.GetApiKeyRequestHandler
 import io.ktor.server.application.*
+import io.ktor.server.http.content.*
 import io.ktor.server.locations.*
 import io.ktor.server.routing.*
 
@@ -12,44 +14,17 @@ import io.ktor.server.routing.*
 fun Application.configureRouting(contentFactory: ContentFactory) {
     routing {
         get<WebLocation.FrontPageLocation> {location ->
-            val requestHandler = RequestHandler.FrontPageRequestHandler(contentFactory)
+            val requestHandler = FrontPageRequestHandler(contentFactory)
             with(requestHandler) {
                 handle(location)
             }
         }
 
         get<WebLocation.GetApiKeyLocation> { location ->
-            with(RequestHandler.GetApiKeyRequestHandler(contentFactory)) {
+            with(GetApiKeyRequestHandler(contentFactory)) {
                 handle(location)
             }
         }
+        staticResources("/styles", "css")
     }
 }
-
-
-
-// @OptIn(KtorExperimentalLocationsAPI::class)
-// fun Application.configureRouting() {
-//     routing {
-//         val allRequestHandlers = allRequestHandlers
-//         allRequestHandlers.map { requestHandler ->
-//             val location = requestHandler::class.typeParameters
-//                 .firstNotNullOfOrNull { it::class as? WebLocation }
-//                 ?: throw IllegalArgumentException("RequestHandler must have a location type parameter")
-//
-//             val path = location::class.findAnnotation<Location>()?.path
-//                 ?: throw IllegalArgumentException("Location must have a @Location annotation")
-//
-//             when(requestHandler.method) {
-//                 HttpMethod.GET -> {
-//                     get(path) { location ->
-//                         call.respondText {
-//                             "this shit works"
-//                         }
-//                     }
-//                 }
-//                 HttpMethod.POST -> TODO()
-//             }
-//         }
-//     }
-// }
